@@ -33,7 +33,7 @@ public class DruidDataSourceConfig {
         bean.setPlugins(new Interceptor[] {new JoinInterceptor()});
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
-            //基于注解扫描Mapper，不需配置xml路径
+            // 基于注解扫描Mapper，不需配置xml路径
             bean.setMapperLocations(resolver.getResources("classpath:mapping/*.xml"));
             return bean.getObject();
         } catch (Exception e) {

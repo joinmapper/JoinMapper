@@ -18,7 +18,7 @@ public class MyBatisMapperScannerConfig {
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setBasePackage("pers.zhangkai.mybatis.dao");
 
-        //初始化扫描器的相关配置，这里我们要创建一个Mapper的父类
+        // 初始化扫描器的相关配置，这里我们要创建一个Mapper的父类
         Properties properties = new Properties();
         properties.setProperty("mappers", "tk.mybatis.mapper.common.Mapper,JoinMapper");
 
