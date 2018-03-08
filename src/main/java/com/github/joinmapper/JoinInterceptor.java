@@ -21,15 +21,9 @@ import java.util.Properties;
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Intercepts(
-        {
-                @Signature(type = Executor.class, method = "query", args = {MappedStatement.class,
-
-                        Object.class,
-
-                        RowBounds.class,
-
-                        ResultHandler.class}),
-        }
+    {
+        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+    }
 )
 public class JoinInterceptor implements Interceptor {
 
