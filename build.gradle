@@ -1,0 +1,53 @@
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'java'
+
+group 'com.github.joinmapper'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+ext{
+    springBootVersion="1.5.3.RELEASE"
+}
+
+repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "http://repo1.maven.apache.org/maven2" }
+    mavenCentral()
+    jcenter()
+}
+
+configurations {
+    runtime.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    compile.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    runtime.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    compile.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+}
+
+dependencies {
+    compile group: 'tk.mybatis', name: 'mapper-spring-boot-starter', version: '1.2.3'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: "$springBootVersion"
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: "$springBootVersion"
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "$springBootVersion"
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: "$springBootVersion"
+    //testCompile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: "$springBootVersion"  //tk.mybatis不支持热部署
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: "$springBootVersion"
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '1.2.2.RELEASE'
+    testCompile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.2.0'
+
+    testCompile group: 'org.springframework.amqp', name: 'spring-amqp', version: '1.7.0.RELEASE'
+    testCompile group: 'com.zaxxer', name: 'HikariCP', version: '2.6.0'
+    testCompile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.5.9'
+    testCompile group: 'mysql', name: 'mysql-connector-java', version: '5.1.31'
+    testCompile group: 'com.alibaba', name: 'druid', version: '1.0.2'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.9'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "$springBootVersion"
+    testCompile group: 'com.github.pagehelper', name: 'pagehelper', version: "5.0.1"
+
+}
+
+sourceSets*.allSource.srcDirs.flatten()*.mkdirs()
