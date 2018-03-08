@@ -1,10 +1,12 @@
 package com.github.joinmapper.model;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Table(name = "table_two")
 public class TableTwo {
+    @Id
     private String id;
     private String code;
     @Transient

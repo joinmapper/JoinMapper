@@ -26,6 +26,6 @@
         <root level="INFO" includeLocation="true">
             <appender-ref ref="Console"/>
         </root>
-        <logger name="pers.zhangkai.mybatis.dao" level="DEBUG"/>
+        <logger name="com.github.joinmapper.dao" level="DEBUG"/>
     </loggers>
 </configuration>

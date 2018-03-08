@@ -1,9 +1,12 @@
 package com.github.joinmapper.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.joinmapper.common.JoinMapper;
+import com.github.joinmapper.dao.TableOneMapper;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import java.util.Properties;
@@ -16,11 +19,12 @@ public class MyBatisMapperScannerConfig {
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        mapperScannerConfigurer.setBasePackage("pers.zhangkai.mybatis.dao");
+        String packageName = TableOneMapper.class.getPackage().getName();
+        mapperScannerConfigurer.setBasePackage(packageName);
 
         // 初始化扫描器的相关配置，这里我们要创建一个Mapper的父类
         Properties properties = new Properties();
-        properties.setProperty("mappers", "tk.mybatis.mapper.common.Mapper,JoinMapper");
+        properties.setProperty("mappers", Mapper.class.getTypeName() + "," + JoinMapper.class.getTypeName());
 
         mapperScannerConfigurer.setProperties(properties);
 
@@ -28,7 +32,7 @@ public class MyBatisMapperScannerConfig {
     }
 
     public static void main(String[] args) {
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+        /*MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setBasePackage("pers.zhangkai.mybatis.dao");
 
@@ -37,6 +41,8 @@ public class MyBatisMapperScannerConfig {
         properties.setProperty("mappers", "tk.mybatis.mapper.common.Mapper,JoinMapper");
 
         mapperScannerConfigurer.setProperties(properties);
-        System.out.println(JSONObject.toJSON(mapperScannerConfigurer.getMapperHelper()));
+        System.out.println(JSONObject.toJSON(mapperScannerConfigurer.getMapperHelper()));*/
+
+        System.out.println(JoinMapper.class.getTypeName());
     }
 }

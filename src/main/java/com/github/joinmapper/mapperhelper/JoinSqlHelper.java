@@ -1,12 +1,13 @@
 package com.github.joinmapper.mapperhelper;
 
+import com.github.joinmapper.util.JoinOGNL;
 import tk.mybatis.mapper.entity.EntityColumn;
 import tk.mybatis.mapper.mapperhelper.EntityHelper;
-import tk.mybatis.mapper.mapperhelper.SqlHelper;
 
 import java.util.Set;
 
 public class JoinSqlHelper {
+    public static final String JOIN_OGNL_TYPE_NAME = JoinOGNL.class.getTypeName();
 
     /**
      * example支持查询指定列时
@@ -24,7 +25,7 @@ public class JoinSqlHelper {
         sql.append("</when>");
         //不支持指定列的时候查询全部列
         sql.append("<otherwise>");
-        sql.append("${@JoinOGNL@getAllColumns(_parameter)}");// 使用_parameter
+        sql.append("${@" + JOIN_OGNL_TYPE_NAME + " @getAllColumns(_parameter)}");// 使用_parameter
         sql.append("</otherwise>");
         sql.append("</choose>");
         return sql.toString();
@@ -103,7 +104,7 @@ public class JoinSqlHelper {
     }
 
     public static String join(Class<?> entityClass) {
-        return " ${@JoinOGNL@join(_parameter)} ";
+        return " ${@" + JOIN_OGNL_TYPE_NAME + " @join(_parameter)} ";
     }
 
     /**
@@ -124,7 +125,7 @@ public class JoinSqlHelper {
             sql.append("</if>");
         }*/
 //        return sql.toString();
-        return " ${@JoinOGNL@orderBy(_parameter)} ";
+        return " ${@" + JOIN_OGNL_TYPE_NAME + "@orderBy(_parameter)} ";
     }
 
     /**

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @SpringBootApplication
-@MapperScan(basePackages = "pers.zhangkai.mybatis.dao")
+@MapperScan(basePackages = "com.github.joinmapper.dao")
 public class TestAppMain {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(TestAppMain.class);

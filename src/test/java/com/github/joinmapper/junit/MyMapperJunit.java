@@ -71,26 +71,30 @@ public class MyMapperJunit extends BaseJunit {
 
     @Test
     public void testJoinExample2() {
-        JoinExample tableOneEx = new JoinExample(TableOne.class);
-        tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
+        try {
+            JoinExample tableOneEx = new JoinExample(TableOne.class);
+            tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
 //        tableOneEx.selectProperties("id");
-        Example.Criteria criteria = tableOneEx.createCriteria();
-        criteria.andEqualTo("id", "table_one_1");
+            Example.Criteria criteria = tableOneEx.createCriteria();
+            criteria.andEqualTo("id", "table_one_1");
 
-        JoinExample tableTwoEx = new JoinExample(TableTwo.class);
+            JoinExample tableTwoEx = new JoinExample(TableTwo.class);
 
-        JoinExample tableThreeEx = new JoinExample(TableThree.class);
+            JoinExample tableThreeEx = new JoinExample(TableThree.class);
 
-        JoinExample tableFourEx = new JoinExample(TableFour.class);
+            JoinExample tableFourEx = new JoinExample(TableFour.class);
 
-        //关联查询设置
-        tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
-        tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
-        tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
+            //关联查询设置
+            tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
+            tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
+            tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
 
 
-        List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
-        super.print(tableOneList);
+            List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
+            super.print(tableOneList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

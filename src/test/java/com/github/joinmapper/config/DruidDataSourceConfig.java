@@ -2,6 +2,8 @@ package com.github.joinmapper.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.joinmapper.JoinInterceptor;
+import com.github.joinmapper.dao.TableOneMapper;
+import com.github.joinmapper.model.TableOne;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -29,7 +31,8 @@ public class DruidDataSourceConfig {
     public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setTypeAliasesPackage("pers.zhangkai.mybatis.model");
+        String packageName = TableOne.class.getPackage().getName();
+        bean.setTypeAliasesPackage(packageName);
         bean.setPlugins(new Interceptor[]{new JoinInterceptor()});
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {

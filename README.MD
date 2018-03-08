@@ -1,6 +1,8 @@
-### Installation
-   - Use in SpringBoot
+# Installation
+### Use in SpringBoot
         - Config Interceptor
+            > mapper-spring-boot-starter ( More than 1.1.4 versions ) 1.2.4之后还有问题 java.lang.NoSuchMethodError: org.springframework.boot.SpringApplication.<init>([Ljava/lang/Object;)V
+            > tk.mytatis ( More than 3.4.3 versions )
             ```java
            @Bean(name="sqlSessionFactory")
            public SqlSessionFactory getSqlSessionFactory(DataSource dataSource){
@@ -37,3 +39,5 @@
           
                   return mapperScannerConfigurer;
               }
+    
+### Use in Spring
