@@ -15,6 +15,7 @@ public abstract class JoinOGNL {
 
     /**
      * 拼接join语句
+     *
      * @param joinFrom
      * @return
      */
@@ -29,6 +30,7 @@ public abstract class JoinOGNL {
 
     /**
      * 递归查找拼接join语句
+     *
      * @param joinExample
      * @param sql
      */
@@ -63,6 +65,7 @@ public abstract class JoinOGNL {
 
     /**
      * 获取所有的column
+     *
      * @param joinExample
      * @return
      */
@@ -74,6 +77,7 @@ public abstract class JoinOGNL {
 
     /**
      * 获取所有的order by
+     *
      * @param joinExample
      * @return
      */
@@ -88,12 +92,12 @@ public abstract class JoinOGNL {
         String tableName = EntityHelper.getEntityTable(entityClass).getName();
         String orderByClause = joinExample.getOrderByClause();
 //        orderByClause = "id,code DESC,code ASC"
-        if (orderByClause != null || !"".equals(orderByClause)){
+        if (orderByClause != null || !"".equals(orderByClause)) {
             sql.append(" order by ");
-            String[] orderByColumns = orderByClause.replace("orderType","").split(",");
-            for ( int i = 0; i < orderByColumns.length; i++ ){
+            String[] orderByColumns = orderByClause.replace("orderType", "").split(",");
+            for (int i = 0; i < orderByColumns.length; i++) {
                 sql.append(tableName + "_" + orderByColumns[i]);
-                if(i!=orderByColumns.length-1){
+                if (i != orderByColumns.length - 1) {
                     sql.append(",");
                 }
             }
@@ -111,9 +115,10 @@ public abstract class JoinOGNL {
         StringBuilder sql = new StringBuilder();
         sql.append("a,b,");
         int i = sql.lastIndexOf(",");
-        sql = sql.replace(i-1, i, "");
+        sql = sql.replace(i - 1, i, "");
         System.out.println(sql);
     }
+
     private static void addColumnsFromJoinList(List<JoinExample.Join> joinList, StringBuilder sql) {
         for (JoinExample.Join join : joinList) {
             JoinExample joinTo = join.getJoinTo();

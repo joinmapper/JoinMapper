@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 关联查询
+ *
  * @param <T>
  */
 public interface JoinMapper<T> {

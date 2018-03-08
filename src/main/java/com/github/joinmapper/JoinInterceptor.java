@@ -39,10 +39,10 @@ public class JoinInterceptor implements Interceptor {
         MappedStatement ms = (MappedStatement) args[0];
         Object parameter = args[1];
         // 关联查询判断
-        if ( parameter != null && parameter instanceof JoinExample) {
+        if (parameter != null && parameter instanceof JoinExample) {
             // 设置resultMap
             JoinExample joinExample = (JoinExample) parameter;
-            JoinMapperTemplate.setJoinResultType(ms,joinExample);
+            JoinMapperTemplate.setJoinResultType(ms, joinExample);
         }
         Object proceed = invocation.proceed();
         return proceed;

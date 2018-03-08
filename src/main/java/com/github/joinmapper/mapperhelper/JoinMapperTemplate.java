@@ -20,6 +20,7 @@ public class JoinMapperTemplate extends MapperTemplate {
 
     /**
      * 设置resultMap
+     *
      * @param ms
      * @param joinExample
      */
@@ -40,14 +41,14 @@ public class JoinMapperTemplate extends MapperTemplate {
         resultMappingsNew.addAll(resultMappings);
 
         // 关联对象的映射
-        for ( JoinExample.Join join:joinExample.getJoinList() ) {
+        for (JoinExample.Join join : joinExample.getJoinList()) {
             JoinExample joinTo = join.getJoinTo();
             JoinExample.ResultType resultType = join.getResultType();
             String resultProperty = join.getResultProperty();
             JoinEntityTable toEntityTable = JoinEntityHelper.getJoinEntityTable(joinTo.getEntityClass());
             ResultMap toTesultMap = toEntityTable.getResultMap(ms.getConfiguration());
             Class<?> javaType = joinTo.getEntityClass();
-            if (join.getResultType()== JoinExample.ResultType.MANY){
+            if (join.getResultType() == JoinExample.ResultType.MANY) {
                 javaType = List.class; // 一对多结果映射
             }
             ResultMapping resultMapping = new ResultMapping.Builder(ms.getConfiguration(), resultProperty, null, javaType).nestedResultMapId(toTesultMap.getId()).build();

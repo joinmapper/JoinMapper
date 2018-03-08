@@ -11,6 +11,7 @@ public class JoinExample extends Example {
      * 需要关联查询的Example
      */
     private List<Join> joinList = new ArrayList<>();
+
     public JoinExample(Class<?> entityClass) {
         super(entityClass);
     }
@@ -24,23 +25,23 @@ public class JoinExample extends Example {
     }
 
 
-    private void addJoin(Join join){
+    private void addJoin(Join join) {
         this.joinList.add(join);
     }
 
-    public Join leftJoin(JoinExample joinExample, ResultType resultType, String resultProperty,String onProperty1, String onProperty2){
+    public Join leftJoin(JoinExample joinExample, ResultType resultType, String resultProperty, String onProperty1, String onProperty2) {
         Join join = new Join(JoinType.LEFT, joinExample, resultType, resultProperty, onProperty1, onProperty2);
         addJoin(join);
         return join;
     }
 
-    public Join rightJoin(JoinExample joinExample, ResultType resultType, String resultProperty,String onProperty1, String onProperty2){
+    public Join rightJoin(JoinExample joinExample, ResultType resultType, String resultProperty, String onProperty1, String onProperty2) {
         Join join = new Join(JoinType.RIGHT, joinExample, resultType, resultProperty, onProperty1, onProperty2);
         addJoin(join);
         return join;
     }
 
-    public Join innerJoin(JoinExample joinExample, ResultType resultType, String resultProperty,String onProperty1, String onProperty2){
+    public Join innerJoin(JoinExample joinExample, ResultType resultType, String resultProperty, String onProperty1, String onProperty2) {
         Join join = new Join(JoinType.INNER, joinExample, resultType, resultProperty, onProperty1, onProperty2);
         addJoin(join);
         return join;
@@ -60,23 +61,26 @@ public class JoinExample extends Example {
         return joinList;
     }
 
-    public enum JoinType{
-        LEFT("LEFT JOIN"),RIGHT("RIGHT JOIN"),INNER("INNER JOIN");
+    public enum JoinType {
+        LEFT("LEFT JOIN"), RIGHT("RIGHT JOIN"), INNER("INNER JOIN");
         private String Type;
+
         private JoinType(String type) {
             Type = type;
         }
+
         public String getType() {
             return Type;
         }
+
         public void setType(String type) {
             Type = type;
         }
     }
 
     public static class JoinProperty {
-        private String  property1;
-        private String  property2;
+        private String property1;
+        private String property2;
 
         public JoinProperty(String property1, String property2) {
             this.property1 = property1;
@@ -106,6 +110,7 @@ public class JoinExample extends Example {
         private ResultType resultType;
         private String resultProperty;
         private List<JoinProperty> joinPropertyList = new ArrayList<>();
+
         public Join(JoinType joinType, JoinExample joinTo) {
             this.joinType = joinType;
             this.joinTo = joinTo;
@@ -119,7 +124,7 @@ public class JoinExample extends Example {
             this.on(onProperty1, onProperty2);
         }
 
-        public Join on(String property1, String property2){
+        public Join on(String property1, String property2) {
             JoinProperty joinProperty = new JoinProperty(property1, property2);
             joinPropertyList.add(joinProperty);
             return this;
@@ -167,6 +172,6 @@ public class JoinExample extends Example {
     }
 
     public static enum ResultType {
-        ONE,MANY
+        ONE, MANY
     }
 }

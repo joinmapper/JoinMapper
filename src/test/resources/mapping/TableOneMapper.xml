@@ -18,6 +18,7 @@
     </select>
 
     <select id="selectJoin_" resultMap="BaseResultMap">
-        select a.id as a_id,a.code as a_code,b.id as b_id,b.code as b_code from table_one a LEFT JOIN table_two b on a.id = b.id
+        select a.id as a_id,a.code as a_code,b.id as b_id,b.code as b_code from table_one a LEFT JOIN table_two b on
+        a.id = b.id
     </select>
 </mapper>

@@ -40,7 +40,7 @@ public class JoinEntityTable {
                 String column = entityColumn.getColumn();
                 //去掉可能存在的分隔符
                 Matcher matcher = EntityTable.DELIMITER.matcher(column);
-                if(matcher.find()){
+                if (matcher.find()) {
                     column = matcher.group(1);
                 }
                 column = tableName + "_" + column;//字段加前缀tableName
@@ -50,7 +50,7 @@ public class JoinEntityTable {
                 }
                 if (entityColumn.getTypeHandler() != null) {
                     try {
-                        builder.typeHandler(entityTable.getInstance(entityColumn.getJavaType(),entityColumn.getTypeHandler()));
+                        builder.typeHandler(entityTable.getInstance(entityColumn.getJavaType(), entityColumn.getTypeHandler()));
                     } catch (Exception e) {
                         throw new MapperException(e);
                     }
@@ -62,10 +62,10 @@ public class JoinEntityTable {
                 builder.flags(flags);
                 resultMappings.add(builder.build());
             }
-            ResultMap.Builder builder = new ResultMap.Builder(configuration, entityTable.getName()+".BaseMapperJoinResultMap", entityTable.getEntityClass(), resultMappings, true);
+            ResultMap.Builder builder = new ResultMap.Builder(configuration, entityTable.getName() + ".BaseMapperJoinResultMap", entityTable.getEntityClass(), resultMappings, true);
             this.joinResultMap = builder.build();
         }
-        if (!configuration.hasResultMap(this.joinResultMap.getId())){
+        if (!configuration.hasResultMap(this.joinResultMap.getId())) {
             configuration.addResultMap(this.joinResultMap);// org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getNestedResultMap 需要， 用于resultMap嵌套时搜索
         }
         return this.joinResultMap;

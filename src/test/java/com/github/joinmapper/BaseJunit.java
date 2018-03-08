@@ -13,34 +13,36 @@ import javax.sql.DataSource;
 public class BaseJunit {
     @Autowired
     protected DataSource dataSource;
-    public void print(Object obj){
+
+    public void print(Object obj) {
         System.out.println("data start=========================================");
-        if (obj!=null) {
+        if (obj != null) {
             System.out.println(layoutJSON(JSONObject.toJSON(obj).toString()));
-        }else{
+        } else {
             System.out.println(obj);
         }
         System.out.println("data end===========================================");
     }
+
     /**
      * 得到格式化json数据  退格用\t 换行用\r
      */
     public static String layoutJSON(String jsonStr) {
         int level = 0;
         StringBuffer jsonForMatStr = new StringBuffer();
-        for(int i=0;i<jsonStr.length();i++){
+        for (int i = 0; i < jsonStr.length(); i++) {
             char c = jsonStr.charAt(i);
-            if(level>0&&'\n'==jsonForMatStr.charAt(jsonForMatStr.length()-1)){
+            if (level > 0 && '\n' == jsonForMatStr.charAt(jsonForMatStr.length() - 1)) {
                 jsonForMatStr.append(getLevelStr(level));
             }
             switch (c) {
                 case '{':
                 case '[':
-                    jsonForMatStr.append(c+"\n");
+                    jsonForMatStr.append(c + "\n");
                     level++;
                     break;
                 case ',':
-                    jsonForMatStr.append(c+"\n");
+                    jsonForMatStr.append(c + "\n");
                     break;
                 case '}':
                 case ']':
@@ -59,9 +61,9 @@ public class BaseJunit {
 
     }
 
-    private static String getLevelStr(int level){
+    private static String getLevelStr(int level) {
         StringBuffer levelStr = new StringBuffer();
-        for(int levelI = 0;levelI<level ; levelI++){
+        for (int levelI = 0; levelI < level; levelI++) {
             levelStr.append("\t");
         }
         return levelStr.toString();

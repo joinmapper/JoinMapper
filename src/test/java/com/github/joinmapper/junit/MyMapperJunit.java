@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MyMapperJunit extends BaseJunit {
     @Test
-    public void dataSource(){
+    public void dataSource() {
         DataSource dataSource = super.dataSource;
         String s = dataSource.toString();
         System.out.println(s);
@@ -30,8 +30,9 @@ public class MyMapperJunit extends BaseJunit {
     TableTwoMapper tableTwoMapper;
     @Autowired
     TableThreeMapper tableThreeMapper;
+
     @Test
-    public void testMapper(){
+    public void testMapper() {
         /*int count = tableOneMapper.getCount();
         super.print(count);
         int count1 = tableOneMapper.selectCount(new TableOne());
@@ -41,40 +42,40 @@ public class MyMapperJunit extends BaseJunit {
     }
 
     @Test
-    public void testExample(){
+    public void testExample() {
         Example example = new Example(TableOne.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("code","table_one_code");
+        criteria.andEqualTo("code", "table_one_code");
         List<TableOne> tableOnes = tableOneMapper.selectByExample(example);
         super.print(tableOnes);
     }
 
     @Test
-    public void testJoinExample1(){
+    public void testJoinExample1() {
         JoinExample tableOneEx = new JoinExample(TableOne.class);
 //        tableOneEx.selectProperties("id");
         Example.Criteria criteria = tableOneEx.createCriteria();
-        criteria.andEqualTo("id","table_one_1");
+        criteria.andEqualTo("id", "table_one_1");
 
         JoinExample tableTwoEx = new JoinExample(TableTwo.class);
 
         JoinExample tableThreeEx = new JoinExample(TableThree.class);
 
         //关联查询设置
-        tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE,"tableTwo","id","id").on("code","code");
-        tableOneEx.rightJoin(tableThreeEx, JoinExample.ResultType.ONE,"tableThree","id","id");
+        tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id").on("code", "code");
+        tableOneEx.rightJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
 
         List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
         super.print(tableOneList);
     }
 
     @Test
-    public void testJoinExample2(){
+    public void testJoinExample2() {
         JoinExample tableOneEx = new JoinExample(TableOne.class);
         tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
 //        tableOneEx.selectProperties("id");
         Example.Criteria criteria = tableOneEx.createCriteria();
-        criteria.andEqualTo("id","table_one_1");
+        criteria.andEqualTo("id", "table_one_1");
 
         JoinExample tableTwoEx = new JoinExample(TableTwo.class);
 
@@ -83,11 +84,9 @@ public class MyMapperJunit extends BaseJunit {
         JoinExample tableFourEx = new JoinExample(TableFour.class);
 
         //关联查询设置
-        tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE,"tableTwo","id","id");
-        tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE,"tableThree","id","id");
-        tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id","id");
-
-
+        tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
+        tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
+        tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
 
 
         List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);

@@ -38,7 +38,6 @@ import tk.mybatis.mapper.mapperhelper.SqlHelper;
 public class JoinProvider extends JoinMapperTemplate {
 
 
-
     public JoinProvider(Class<?> mapperClass, MapperHelper mapperHelper) {
         super(mapperClass, mapperHelper);
     }

@@ -22,13 +22,13 @@ public class JoinEntityHelper {
      */
     public static JoinEntityTable getJoinEntityTable(Class<?> entityClass) {
         JoinEntityTable joinEntityTable = joinEntityTableMap.get(entityClass);
-        if (joinEntityTable==null) {
+        if (joinEntityTable == null) {
             EntityTable entityTable = EntityHelper.getEntityTable(entityClass);
             if (entityTable == null) {
                 throw new MapperException("无法获取实体类" + entityClass.getCanonicalName() + "对应的表名!");
             }
             joinEntityTable = new JoinEntityTable(entityTable);
-            joinEntityTableMap.put(entityClass,joinEntityTable);
+            joinEntityTableMap.put(entityClass, joinEntityTable);
         }
         return joinEntityTable;
     }

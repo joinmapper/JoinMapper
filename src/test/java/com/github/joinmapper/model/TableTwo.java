@@ -2,6 +2,7 @@ package com.github.joinmapper.model;
 
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 @Table(name = "table_two")
 public class TableTwo {
     private String id;
