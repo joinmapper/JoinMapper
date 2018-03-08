@@ -1,5 +1,5 @@
 ### Installation
-   - SpringBoot
+   - Use in SpringBoot
         - Config Interceptor
             ```java
            @Bean(name="sqlSessionFactory")
