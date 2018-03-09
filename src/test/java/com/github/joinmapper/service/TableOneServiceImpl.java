@@ -25,6 +25,7 @@ import java.util.List;
 public class TableOneServiceImpl implements TableOneService {
     @Autowired
     private TableOneMapper tableOneMapper;
+
     @Override
     public PageInfo<TableOne> getPage() {
         Page<TableOne> page = PageHelper.startPage(1, 10);

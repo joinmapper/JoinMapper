@@ -17,7 +17,7 @@ import tk.mybatis.mapper.entity.Example;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class BaseJoinMapperJunit extends JunitUtil{
+public class BaseJoinMapperJunit extends JunitUtil {
     @Autowired
     protected DataSource dataSource;
 
