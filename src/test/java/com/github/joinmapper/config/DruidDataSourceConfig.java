@@ -29,17 +29,12 @@ public class DruidDataSourceConfig {
     }
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) {
+    public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         String packageName = TableOne.class.getPackage().getName();
         bean.setTypeAliasesPackage(packageName);
         PageInterceptor pageInterceptor = new PageInterceptor();
-//        helperDialect=mysql
-//        reasonable=true
-//        supportMethodsArguments=true
-//        params=count=countSql
-//        autoRuntimeDialect=true
         Properties properties = new Properties();
         properties.setProperty("helperDialect", "mysql");
         properties.setProperty("reasonable", "true");
@@ -47,16 +42,10 @@ public class DruidDataSourceConfig {
         properties.setProperty("params", "count=countSql");
         properties.setProperty("autoRuntimeDialect", "true");
         pageInterceptor.setProperties(properties);
-        bean.setPlugins(new Interceptor[]{pageInterceptor, new JoinInterceptor()}); // 插件的执行顺序为倒叙,JoinInterceptor先执行
+        bean.setPlugins(new Interceptor[]{pageInterceptor, new JoinInterceptor()}); // 插件的执行顺序为倒叙,让JoinInterceptor先执行
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        try {
-            // 基于注解扫描Mapper，不需配置xml路径
-            bean.setMapperLocations(resolver.getResources("classpath:mapping/*.xml"));
-            return bean.getObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        bean.setMapperLocations(resolver.getResources("classpath:mapping/*.xml"));
+        return bean.getObject();
     }
 
 

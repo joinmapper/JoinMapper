@@ -1,6 +1,5 @@
 package com.github.joinmapper.config;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.joinmapper.common.JoinMapper;
 import com.github.joinmapper.dao.TableOneMapper;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -21,13 +20,9 @@ public class MyBatisMapperScannerConfig {
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         String packageName = TableOneMapper.class.getPackage().getName();
         mapperScannerConfigurer.setBasePackage(packageName);
-
-        // 初始化扫描器的相关配置，这里我们要创建一个Mapper的父类
         Properties properties = new Properties();
-        properties.setProperty("mappers", Mapper.class.getTypeName() + "," + JoinMapper.class.getTypeName());
-
+        properties.setProperty("mappers", Mapper.class.getTypeName() + "," + JoinMapper.class.getTypeName()); // mappers
         mapperScannerConfigurer.setProperties(properties);
-
         return mapperScannerConfigurer;
     }
 
