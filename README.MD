@@ -4,7 +4,7 @@
         >- mapper-spring-boot-starter ( More than 1.1.4 versions ) ,
         >- tk.mytatis ( More than 3.4.3 versions )
             <!-- mapper-spring-boot-starter 1.2.4之后还有问题 java.lang.NoSuchMethodError: org.springframework.boot.SpringApplication.<init>([Ljava/lang/Object;)V -->
-    - Config Interceptor ([link text](https://www.google.com "View the details")) 
+    - Config Interceptor ([link text](https://github.com/joinmapper/JoinMapper/blob/6995b9def117896f25edeb5bfd5ad4a2c1bac57f/src/test/java/com/github/joinmapper/test/springboot/config/DruidDataSourceConfig.java#L45 "View the details")) 
         ```java
         @Bean(name = "sqlSessionFactory")
         public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) throws Exception {
