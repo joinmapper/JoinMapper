@@ -92,7 +92,7 @@ public abstract class JoinOGNL {
         String tableName = EntityHelper.getEntityTable(entityClass).getName();
         String orderByClause = joinExample.getOrderByClause();
 //        orderByClause = "id,code DESC,code ASC"
-        if (orderByClause != null || !"".equals(orderByClause)) {
+        if (orderByClause != null && !"".equals(orderByClause)) {
             sql.append(" order by ");
             String[] orderByColumns = orderByClause.replace("orderType", "").split(",");
             for (int i = 0; i < orderByColumns.length; i++) {

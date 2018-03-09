@@ -1,18 +1,14 @@
-package com.github.joinmapper;
+package com.github.joinmapper.junit;
 
 import com.alibaba.fastjson.JSONObject;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.sql.DataSource;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = TestAppMain.class)
-public class BaseJunit {
-    @Autowired
-    protected DataSource dataSource;
+/**
+ * describe:
+ *
+ * @author zhangkai02
+ * @date 2018/03/09
+ */
+public class JunitUtil {
 
     public void print(Object obj) {
         System.out.println("data start=========================================");
@@ -68,4 +64,5 @@ public class BaseJunit {
         }
         return levelStr.toString();
     }
+
 }

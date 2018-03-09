@@ -1,25 +1,26 @@
 package com.github.joinmapper.junit;
 
-import com.github.joinmapper.entity.JoinExample;
+import com.github.joinmapper.dao.TableOneMapper;
 import com.github.joinmapper.dao.TableThreeMapper;
+import com.github.joinmapper.dao.TableTwoMapper;
+import com.github.joinmapper.entity.JoinExample;
 import com.github.joinmapper.model.TableFour;
+import com.github.joinmapper.model.TableOne;
 import com.github.joinmapper.model.TableThree;
 import com.github.joinmapper.model.TableTwo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.github.joinmapper.BaseJunit;
-import com.github.joinmapper.dao.TableOneMapper;
-import com.github.joinmapper.dao.TableTwoMapper;
-import com.github.joinmapper.model.TableOne;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.sql.DataSource;
 import java.util.List;
 
-public class MyMapperJunit extends BaseJunit {
+public class BaseJoinMapperJunit extends JunitUtil{
+    @Autowired
+    protected DataSource dataSource;
+
     @Test
     public void dataSource() {
-        DataSource dataSource = super.dataSource;
         String s = dataSource.toString();
         System.out.println(s);
     }
@@ -96,5 +97,4 @@ public class MyMapperJunit extends BaseJunit {
             e.printStackTrace();
         }
     }
-
 }
