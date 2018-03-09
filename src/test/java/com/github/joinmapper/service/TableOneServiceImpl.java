@@ -46,7 +46,6 @@ public class TableOneServiceImpl implements TableOneService {
         tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
         tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
 
-
         List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
         return page.toPageInfo();
     }
