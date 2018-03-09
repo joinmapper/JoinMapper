@@ -4,7 +4,7 @@
             >- mapper-spring-boot-starter ( More than 1.1.4 versions ) ,
             >- tk.mytatis ( More than 3.4.3 versions )
                 <!-- mapper-spring-boot-starter 1.2.4之后还有问题 java.lang.NoSuchMethodError: org.springframework.boot.SpringApplication.<init>([Ljava/lang/Object;)V -->
-        - Config Interceptor
+        - Config Interceptor (View the details)
             ```java
             @Bean(name = "sqlSessionFactory")
             public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) throws Exception {
@@ -26,7 +26,7 @@
                 return bean.getObject();
             }
         
-        - Config Mapper
+        - Config Mapper (View the details)
             ```java
             @Bean
             public MapperScannerConfigurer mapperScannerConfigurer() {
@@ -44,7 +44,7 @@
    - Use in `Spring Framework`
         - Supported version
             >- tk.mytatis ( More than 3.4.3 versions )
-        - Config Interceptor
+        - Config Interceptor (View the details)
             ```xml
             <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
                 <property name="dataSource" ref="dataSource"/>
@@ -69,8 +69,8 @@
                 </property>
             </bean>
         
-        - Config Mapper
-            ```mxml
+        - Config Mapper (View the details)
+            ```xml
             <bean id="mapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
                 <property name="basePackage" value="com/github/joinmapper/dao"/>
                 <property name="properties">
