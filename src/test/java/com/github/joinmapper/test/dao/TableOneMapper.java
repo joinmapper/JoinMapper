@@ -9,5 +9,5 @@ import java.util.List;
 public interface TableOneMapper extends Mapper<TableOne>, JoinMapper<TableOne> {
     int getCount();
 
-    List<TableOne> selectJoin_();
+    List<TableOne> selectJoinUseXml();
 }

@@ -40,7 +40,7 @@ public class BaseJoinMapperJunit extends JunitUtil {
         super.print(count);
         int count1 = tableOneMapper.selectCount(new TableOne());
         super.print(count1);*/
-        List<TableOne> tableOnes = tableOneMapper.selectJoin_();
+        List<TableOne> tableOnes = tableOneMapper.selectJoinUseXml();
         super.print(tableOnes);
     }
 

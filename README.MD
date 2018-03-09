@@ -45,7 +45,7 @@
 - Install in `Spring Framework`
     - Supported version
         >- tk.mytatis ( More than 3.4.3 versions )
-    - Config Interceptor (View the details)
+    - Configuring Interceptor (View the details)
         ```xml
         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
             <property name="dataSource" ref="dataSource"/>
@@ -70,7 +70,7 @@
             </property>
         </bean>
     
-    - Config Mapper (View the details)
+    - Configuring Mapper (View the details)
         ```xml
         <bean id="mapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
             <property name="basePackage" value="com/github/joinmapper/dao"/>
