@@ -8,6 +8,8 @@ import com.github.joinmapper.model.TableFour;
 import com.github.joinmapper.model.TableOne;
 import com.github.joinmapper.model.TableThree;
 import com.github.joinmapper.model.TableTwo;
+import com.github.joinmapper.service.TableOneService;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
@@ -31,6 +33,8 @@ public class BaseJoinMapperJunit extends JunitUtil{
     TableTwoMapper tableTwoMapper;
     @Autowired
     TableThreeMapper tableThreeMapper;
+    @Autowired
+    TableOneService tableOneService;
 
     @Test
     public void testMapper() {
@@ -93,6 +97,16 @@ public class BaseJoinMapperJunit extends JunitUtil{
 
             List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
             super.print(tableOneList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testJoinPageHelper() {
+        try {
+            PageInfo<TableOne> pageInfo = tableOneService.getPage();
+            super.print(pageInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }

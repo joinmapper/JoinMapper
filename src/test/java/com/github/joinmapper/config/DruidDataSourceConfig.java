@@ -2,8 +2,8 @@ package com.github.joinmapper.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.joinmapper.JoinInterceptor;
-import com.github.joinmapper.dao.TableOneMapper;
 import com.github.joinmapper.model.TableOne;
+import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -15,6 +15,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @AutoConfigureBefore(MyBatisMapperScannerConfig.class)
@@ -33,7 +34,20 @@ public class DruidDataSourceConfig {
         bean.setDataSource(dataSource);
         String packageName = TableOne.class.getPackage().getName();
         bean.setTypeAliasesPackage(packageName);
-        bean.setPlugins(new Interceptor[]{new JoinInterceptor()});
+        PageInterceptor pageInterceptor = new PageInterceptor();
+//        helperDialect=mysql
+//        reasonable=true
+//        supportMethodsArguments=true
+//        params=count=countSql
+//        autoRuntimeDialect=true
+        Properties properties = new Properties();
+        properties.setProperty("helperDialect", "mysql");
+        properties.setProperty("reasonable", "true");
+        properties.setProperty("supportMethodsArguments", "true");
+        properties.setProperty("params", "count=countSql");
+        properties.setProperty("autoRuntimeDialect", "true");
+        pageInterceptor.setProperties(properties);
+        bean.setPlugins(new Interceptor[]{pageInterceptor, new JoinInterceptor()}); // JoinInterceptor先执行
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
             // 基于注解扫描Mapper，不需配置xml路径

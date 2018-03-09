@@ -35,4 +35,8 @@ public class SpringBootBaseJoinMapperJunit extends BaseJoinMapperJunit {
     public void testJoinExample2() {
         super.testJoinExample2();
     }
+
+    public void testJoinPageHelper() {
+        super.testJoinPageHelper();
+    }
 }
