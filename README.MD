@@ -64,7 +64,7 @@
                             </value>
                         </property>
                     </bean>
-                    <bean class="JoinInterceptor">
+                    <bean class="com.github.joinmapper.JoinInterceptor">
                     </bean>
                 </array>
             </property>
