@@ -1,4 +1,4 @@
-package com.github.joinmapper.model;
+package com.github.joinmapper.test.model;
 
 import javax.persistence.Id;
 import javax.persistence.Table;

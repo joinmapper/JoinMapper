@@ -1,6 +1,6 @@
-package com.github.joinmapper.junit.spring;
+package com.github.joinmapper.test.junit.spring;
 
-import com.github.joinmapper.junit.BaseJoinMapperJunit;
+import com.github.joinmapper.test.junit.BaseJoinMapperJunit;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,5 +35,9 @@ public class SpringJoinMapperJunit extends BaseJoinMapperJunit {
 
     public void testJoinExample2() {
         super.testJoinExample2();
+    }
+
+    public void testJoinPageHelper() {
+        super.testJoinPageHelper();
     }
 }

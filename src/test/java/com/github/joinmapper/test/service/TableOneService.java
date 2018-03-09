@@ -1,6 +1,6 @@
-package com.github.joinmapper.service;
+package com.github.joinmapper.test.service;
 
-import com.github.joinmapper.model.TableOne;
+import com.github.joinmapper.test.model.TableOne;
 import com.github.pagehelper.PageInfo;
 
 /**

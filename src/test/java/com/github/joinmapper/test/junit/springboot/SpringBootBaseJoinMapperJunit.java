@@ -1,7 +1,7 @@
-package com.github.joinmapper.junit.springboot;
+package com.github.joinmapper.test.junit.springboot;
 
-import com.github.joinmapper.TestAppMain;
-import com.github.joinmapper.junit.BaseJoinMapperJunit;
+import com.github.joinmapper.test.TestAppMain;
+import com.github.joinmapper.test.junit.BaseJoinMapperJunit;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

@@ -1,7 +1,7 @@
-package com.github.joinmapper.config;
+package com.github.joinmapper.test.springboot.config;
 
 import com.github.joinmapper.common.JoinMapper;
-import com.github.joinmapper.dao.TableOneMapper;
+import com.github.joinmapper.test.dao.TableOneMapper;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

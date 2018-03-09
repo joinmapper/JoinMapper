@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.joinmapper.dao.TableOneMapper">
-    <resultMap id="BaseResultMap" type="com.github.joinmapper.model.TableOne">
+<mapper namespace="com.github.joinmapper.test.dao.TableOneMapper">
+    <resultMap id="BaseResultMap" type="com.github.joinmapper.test.model.TableOne">
         <id property="id" column="a_id"></id>
         <result property="code" column="a_code"></result>
         <!--<association property="tableTwo" javaType="TableTwo">
             <id property="id" column="b_id"></id>
             <result property="code" column="b_code"></result>
         </association>-->
-        <collection property="tableTwoList" ofType="com.github.joinmapper.model.TableTwo">
+        <collection property="tableTwoList" ofType="com.github.joinmapper.test.model.TableTwo">
             <id property="id" column="b_id"></id>
             <result property="code" column="b_code"></result>
         </collection>

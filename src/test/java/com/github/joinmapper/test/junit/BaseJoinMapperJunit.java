@@ -1,14 +1,14 @@
-package com.github.joinmapper.junit;
+package com.github.joinmapper.test.junit;
 
-import com.github.joinmapper.dao.TableOneMapper;
-import com.github.joinmapper.dao.TableThreeMapper;
-import com.github.joinmapper.dao.TableTwoMapper;
+import com.github.joinmapper.test.dao.TableOneMapper;
+import com.github.joinmapper.test.dao.TableThreeMapper;
+import com.github.joinmapper.test.dao.TableTwoMapper;
 import com.github.joinmapper.entity.JoinExample;
-import com.github.joinmapper.model.TableFour;
-import com.github.joinmapper.model.TableOne;
-import com.github.joinmapper.model.TableThree;
-import com.github.joinmapper.model.TableTwo;
-import com.github.joinmapper.service.TableOneService;
+import com.github.joinmapper.test.model.TableFour;
+import com.github.joinmapper.test.model.TableOne;
+import com.github.joinmapper.test.model.TableThree;
+import com.github.joinmapper.test.model.TableTwo;
+import com.github.joinmapper.test.service.TableOneService;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

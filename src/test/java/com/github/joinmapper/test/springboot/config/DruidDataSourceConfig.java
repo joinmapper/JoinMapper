@@ -1,8 +1,8 @@
-package com.github.joinmapper.config;
+package com.github.joinmapper.test.springboot.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.joinmapper.JoinInterceptor;
-import com.github.joinmapper.model.TableOne;
+import com.github.joinmapper.test.model.TableOne;
 import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;

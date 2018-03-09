@@ -1,11 +1,11 @@
-package com.github.joinmapper.service;
+package com.github.joinmapper.test.service;
 
-import com.github.joinmapper.dao.TableOneMapper;
+import com.github.joinmapper.test.dao.TableOneMapper;
 import com.github.joinmapper.entity.JoinExample;
-import com.github.joinmapper.model.TableFour;
-import com.github.joinmapper.model.TableOne;
-import com.github.joinmapper.model.TableThree;
-import com.github.joinmapper.model.TableTwo;
+import com.github.joinmapper.test.model.TableFour;
+import com.github.joinmapper.test.model.TableOne;
+import com.github.joinmapper.test.model.TableThree;
+import com.github.joinmapper.test.model.TableTwo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

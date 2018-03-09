@@ -48,7 +48,7 @@
     </bean>
     <!-- spring与mybatis整合配置 -->
     <bean id="mapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com/github/joinmapper/dao"/>
+        <property name="basePackage" value="com/github/joinmapper/test/dao"/>
         <property name="properties">
             <value>
                 mappers=tk.mybatis.mapper.common.Mapper,com.github.joinmapper.common.JoinMapper
@@ -69,5 +69,5 @@
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <context:component-scan base-package="com.github.joinmapper"/>
+    <context:component-scan base-package="com.github.joinmapper.test"/>
 </beans>

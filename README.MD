@@ -4,7 +4,7 @@
             >- mapper-spring-boot-starter ( More than 1.1.4 versions ) ,
             >- tk.mytatis ( More than 3.4.3 versions )
                 <!-- mapper-spring-boot-starter 1.2.4之后还有问题 java.lang.NoSuchMethodError: org.springframework.boot.SpringApplication.<init>([Ljava/lang/Object;)V -->
-        - Config Interceptor (View the details)
+        - Config Interceptor ([link text](https://www.google.com "View the details")) 
             ```java
             @Bean(name = "sqlSessionFactory")
             public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) throws Exception {
@@ -63,7 +63,7 @@
                                 </value>
                             </property>
                         </bean>
-                        <bean class="com.github.joinmapper.JoinInterceptor">
+                        <bean class="JoinInterceptor">
                         </bean>
                     </array>
                 </property>
@@ -75,7 +75,7 @@
                 <property name="basePackage" value="com/github/joinmapper/dao"/>
                 <property name="properties">
                     <value>
-                        mappers=tk.mybatis.mapper.common.Mapper,com.github.joinmapper.common.JoinMapper
+                        mappers=tk.mybatis.mapper.common.Mapper,JoinMapper
         
                     </value>
                 </property>

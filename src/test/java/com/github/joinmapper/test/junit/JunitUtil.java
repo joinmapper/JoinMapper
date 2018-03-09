@@ -1,4 +1,4 @@
-package com.github.joinmapper.junit;
+package com.github.joinmapper.test.junit;
 
 import com.alibaba.fastjson.JSONObject;
 
