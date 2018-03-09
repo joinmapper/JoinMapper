@@ -1,5 +1,5 @@
 ### Installation
-   - Use in `SpringBoot`
+   - Install in `SpringBoot`
         - Supported version
             >- mapper-spring-boot-starter ( More than 1.1.4 versions ) ,
             >- tk.mytatis ( More than 3.4.3 versions )
@@ -41,7 +41,7 @@
             }
 
 
-   - Use in `Spring Framework`
+   - Install in `Spring Framework`
         - Supported version
             >- tk.mytatis ( More than 3.4.3 versions )
         - Config Interceptor (View the details)
@@ -82,3 +82,56 @@
                 <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
                 <property name="sqlSessionTemplateBeanName" value="sqlSession"/>
             </bean>
+  
+### Use in code
+        - Mapper
+        ```java
+        public interface TableOneMapper extends Mapper<TableOne>, JoinMapper<TableOne> {
+            int getCount();
+        
+            List<TableOne> selectJoin_();
+        }
+    
+        - select join
+        ```java
+        JoinExample tableOneEx = new JoinExample(TableOne.class);
+        tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
+        //tableOneEx.selectProperties("id");
+        Example.Criteria criteria = tableOneEx.createCriteria();
+        criteria.andEqualTo("id", "table_one_1");
+    
+        JoinExample tableTwoEx = new JoinExample(TableTwo.class);
+        JoinExample tableThreeEx = new JoinExample(TableThree.class);
+        JoinExample tableFourEx = new JoinExample(TableFour.class);
+    
+        //关联查询设置
+        tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
+        tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
+        tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
+    
+        List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
+        
+        - select join, page
+        ```java
+        public PageInfo<TableOne> getPage() {
+            Page<TableOne> page = PageHelper.startPage(1, 10);
+            JoinExample tableOneEx = new JoinExample(TableOne.class);
+            tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
+            //tableOneEx.selectProperties("id");
+            Example.Criteria criteria = tableOneEx.createCriteria();
+            criteria.andEqualTo("id", "table_one_1");
+    
+            JoinExample tableTwoEx = new JoinExample(TableTwo.class);
+    
+            JoinExample tableThreeEx = new JoinExample(TableThree.class);
+    
+            JoinExample tableFourEx = new JoinExample(TableFour.class);
+    
+            //关联查询设置
+            tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
+            tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
+            tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
+    
+            List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
+            return page.toPageInfo();
+        }

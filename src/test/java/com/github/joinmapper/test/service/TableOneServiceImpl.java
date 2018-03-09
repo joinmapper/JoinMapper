@@ -31,7 +31,7 @@ public class TableOneServiceImpl implements TableOneService {
         Page<TableOne> page = PageHelper.startPage(1, 10);
         JoinExample tableOneEx = new JoinExample(TableOne.class);
         tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
-//        tableOneEx.selectProperties("id");
+        //tableOneEx.selectProperties("id");
         Example.Criteria criteria = tableOneEx.createCriteria();
         criteria.andEqualTo("id", "table_one_1");
 

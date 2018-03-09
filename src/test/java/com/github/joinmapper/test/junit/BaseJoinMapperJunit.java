@@ -28,8 +28,6 @@ public class BaseJoinMapperJunit extends JunitUtil {
     }
 
     @Autowired
-    TableOneMapper tableOneMapper;
-    @Autowired
     TableTwoMapper tableTwoMapper;
     @Autowired
     TableThreeMapper tableThreeMapper;
@@ -74,26 +72,25 @@ public class BaseJoinMapperJunit extends JunitUtil {
         super.print(tableOneList);
     }
 
+    @Autowired
+    TableOneMapper tableOneMapper;
     @Test
     public void testJoinExample2() {
         try {
             JoinExample tableOneEx = new JoinExample(TableOne.class);
             tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
-//        tableOneEx.selectProperties("id");
+            //tableOneEx.selectProperties("id");
             Example.Criteria criteria = tableOneEx.createCriteria();
             criteria.andEqualTo("id", "table_one_1");
 
             JoinExample tableTwoEx = new JoinExample(TableTwo.class);
-
             JoinExample tableThreeEx = new JoinExample(TableThree.class);
-
             JoinExample tableFourEx = new JoinExample(TableFour.class);
 
             //关联查询设置
             tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
             tableTwoEx.leftJoin(tableThreeEx, JoinExample.ResultType.ONE, "tableThree", "id", "id");
             tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList", "id", "id");
-
 
             List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
             super.print(tableOneList);
