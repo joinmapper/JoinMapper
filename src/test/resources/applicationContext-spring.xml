@@ -28,9 +28,9 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<property name="mapperLocations" value="classpath*:mapping/**/*Mapper.xml" />
 		<property name="plugins">
+			<!--插件的执行顺序为倒叙-->
 			<array>
 				<bean class="com.github.pagehelper.PageInterceptor">
-					<!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
 					<property name="properties">
 						<value>
 							helperDialect=mysql

@@ -47,7 +47,7 @@ public class DruidDataSourceConfig {
         properties.setProperty("params", "count=countSql");
         properties.setProperty("autoRuntimeDialect", "true");
         pageInterceptor.setProperties(properties);
-        bean.setPlugins(new Interceptor[]{pageInterceptor, new JoinInterceptor()}); // JoinInterceptor先执行
+        bean.setPlugins(new Interceptor[]{pageInterceptor, new JoinInterceptor()}); // 插件的执行顺序为倒叙,JoinInterceptor先执行
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
             // 基于注解扫描Mapper，不需配置xml路径
