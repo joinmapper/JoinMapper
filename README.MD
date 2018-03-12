@@ -4,7 +4,7 @@
         >- mapper-spring-boot-starter ( More than 1.1.4 versions ) ,
         >- tk.mytatis ( More than 3.4.3 versions )
             <!-- mapper-spring-boot-starter 1.2.4之后还有问题 java.lang.NoSuchMethodError: org.springframework.boot.SpringApplication.<init>([Ljava/lang/Object;)V -->
-    - Configuring Interceptor ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/springboot/config/DruidDataSourceConfig.java#L45 "View the details")) 
+    - Configuring Interceptor ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/springboot/config/DruidDataSourceConfig.java#L45 "View the details")) 
         ```java
         @Bean(name = "sqlSessionFactory")
         public SqlSessionFactory getSqlSessionFactory(DataSource dataSource) throws Exception {
@@ -27,7 +27,7 @@
         }
         ```
     
-    - Configuring Mapper ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/springboot/config/MyBatisMapperScannerConfig.java#L24 "View the details"))
+    - Configuring Mapper ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/springboot/config/MyBatisMapperScannerConfig.java#L24 "View the details"))
         ```java
         @Bean
         public MapperScannerConfigurer mapperScannerConfigurer() {
@@ -45,7 +45,7 @@
 - Install in `Spring Framework`
     - Supported version
         >- tk.mytatis ( More than 3.4.3 versions )
-    - Configuring Interceptor ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/resources/applicationContext-spring.xml#L44 "View the details"))
+    - Configuring Interceptor ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/resources/applicationContext-spring.xml#L44 "View the details"))
         ```xml
         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
             <property name="dataSource" ref="dataSource"/>
@@ -70,7 +70,7 @@
             </property>
         </bean>
     
-    - Configuring Mapper ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/resources/applicationContext-spring.xml#L54 "View the details"))
+    - Configuring Mapper ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/resources/applicationContext-spring.xml#L54 "View the details"))
         ```xml
         <bean id="mapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
             <property name="basePackage" value="com/github/joinmapper/dao"/>
@@ -85,7 +85,7 @@
         </bean>
   
 ### Use in code
-- Mapper ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/dao/TableOneMapper.java#L9 "View the details"))
+- Mapper ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/dao/TableOneMapper.java#L9 "View the details"))
 ```
 public interface TableOneMapper extends Mapper<TableOne>, JoinMapper<TableOne> {
     int getCount();
@@ -93,7 +93,7 @@ public interface TableOneMapper extends Mapper<TableOne>, JoinMapper<TableOne> {
     List<TableOne> selectJoin_();
 }
 ```
-- select join ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/junit/BaseJoinMapperJunit.java#L71 "View the details"))
+- select join ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/junit/BaseJoinMapperJunit.java#L71 "View the details"))
 ```java
 JoinExample tableOneEx = new JoinExample(TableOne.class);
 tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
@@ -113,7 +113,7 @@ tableThreeEx.leftJoin(tableFourEx, JoinExample.ResultType.MANY, "tableFourList",
 List<TableOne> tableOneList = tableOneMapper.selectJoin(tableOneEx);
 ```
 
-- select join, page ([View the details](https://github.com/joinmapper/JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/service/TableOneServiceImpl.java#L30-L52 "View the details"))
+- select join, page ([View the details](https://github.com/joinmapper/Mybatis-JoinMapper/blob/master/src/test/java/com/github/joinmapper/test/service/TableOneServiceImpl.java#L30-L52 "View the details"))
 ```java
 public PageInfo<TableOne> getPage() {
     Page<TableOne> page = PageHelper.startPage(1, 10);
