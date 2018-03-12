@@ -76,7 +76,7 @@
             <property name="basePackage" value="com/github/joinmapper/dao"/>
             <property name="properties">
                 <value>
-                    mappers=tk.mybatis.mapper.common.Mapper,JoinMapper
+                    mappers=tk.mybatis.mapper.common.Mapper,com.github.joinmapper.common.JoinMapper
     
                 </value>
             </property>
