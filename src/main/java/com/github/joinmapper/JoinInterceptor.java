@@ -15,7 +15,7 @@ import org.apache.ibatis.session.RowBounds;
 import java.util.Properties;
 
 /**
- * 关联查询拦截器<br/>
+ * 关联查询拦截器,
  * 项目地址 : https://github.com/joinmapper/JoinMapper
  *
  * @author zhangkai

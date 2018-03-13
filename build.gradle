@@ -1,11 +1,15 @@
 apply plugin: "idea"
 apply plugin: "maven"
 apply plugin: "java"
+apply plugin: 'signing' //使用signing plugin做数字签名
+
 
 group "com.github.joinmapper"
 version "1.0-SNAPSHOT"
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 ext{
     springBootVersion="1.5.9.RELEASE"
@@ -43,11 +47,86 @@ dependencies {
     testCompile group: "com.netflix.hystrix", name: "hystrix-core", version: "1.5.9"
     testCompile group: "mysql", name: "mysql-connector-java", version: "5.1.31"
     testCompile group: "com.alibaba", name: "druid", version: "1.0.2"
-    compile group: "com.alibaba", name: "fastjson", version: "1.2.9"
+    testCompile group: "com.alibaba", name: "fastjson", version: "1.2.9"
     testCompile group: "org.springframework.boot", name: "spring-boot-starter-test", version: "$springBootVersion"
     testCompile group: "com.github.pagehelper", name: "pagehelper", version: "5.0.1"
     testCompile group: "com.alibaba", name: "druid", version: "1.1.8"
 
 }
 
+//目录创建
 sourceSets*.allSource.srcDirs.flatten()*.mkdirs()
+
+//字符编码设置, 放在打包任务之前
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
+    options.charSet = 'UTF-8'
+}
+
+//打包任务
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
+//为所有的jar包做数字签名
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        //为Pom文件做数字签名
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        //指定项目部署到的中央库地址，UserName和Password就是https://issues.sonatype.org中注册的账号。
+        repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
+        }
+
+        //构造项目的Pom文件，参见Part 2中Pom文件的规范，不要遗漏必填项
+        pom.version = "$project.version"
+        pom.artifactId = "mybatis-join-mapper"
+        pom.groupId = "$project.group"
+        pom.project {
+            name "MybatisJoinMapper"
+            packaging 'jar'
+            description '基于tk.myabtis，通过Mapper接口提供数据库表的关联查询功能'
+            url 'https://github.com/joinmapper/Mybatis-JoinMapper'
+            scm {
+                url 'https://github.com/joinmapper/Mybatis-JoinMapper'
+                connection 'scm:git@https://github.com/joinmapper/Mybatis-JoinMapper.git'
+                developerConnection 'git@https://github.com/joinmapper/Mybatis-JoinMapper.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'kaizi2009'
+                    name 'zhangkai'
+                }
+            }
+        }
+    }
+}

@@ -24,8 +24,8 @@ public class JoinEntityTable {
     /**
      * 生成当前实体的resultMap对象
      *
-     * @param configuration
-     * @return
+     * @param configuration Configuration
+     * @return result
      */
     public ResultMap getResultMap(Configuration configuration) {
         //joinResultMap保存组基本的map，然后根据关联映射的需求进行组装

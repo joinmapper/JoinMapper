@@ -11,8 +11,8 @@ public class JoinSqlHelper {
 
     /**
      * example支持查询指定列时
-     *
-     * @return
+     * @param entityClass Class
+     * @return result
      */
     public static String exampleSelectColumns(Class<?> entityClass) {
         String tableName = EntityHelper.getEntityTable(entityClass).getName();
@@ -34,8 +34,8 @@ public class JoinSqlHelper {
     /**
      * 获取所有查询列，如id,name,code...
      *
-     * @param entityClass
-     * @return
+     * @param entityClass Class
+     * @return result
      */
     public static String getAllColumns(Class<?> entityClass) {
         String tableName = EntityHelper.getEntityTable(entityClass).getName();
@@ -50,8 +50,8 @@ public class JoinSqlHelper {
 
     /**
      * Example查询中的where结构，用于只有一个Example参数时
-     *
-     * @return
+     * @param entityClass Class
+     * @return result
      */
     public static String exampleWhereClause(Class<?> entityClass) {
         String tableName = EntityHelper.getEntityTable(entityClass).getName();
@@ -91,8 +91,8 @@ public class JoinSqlHelper {
     /**
      * from tableName - 动态表名
      *
-     * @param entityClass
-     * @return
+     * @param entityClass Class
+     * @return result
      */
     public static String fromTable(Class<?> entityClass) {
         String tableName = EntityHelper.getEntityTable(entityClass).getName();
@@ -109,8 +109,8 @@ public class JoinSqlHelper {
 
     /**
      * example查询中的orderBy条件，会判断默认orderBy
-     *
-     * @return
+     * @param entityClass Class
+     * @return result
      */
     public static String exampleOrderBy(Class<?> entityClass) {
 /*        String tableName = EntityHelper.getEntityTable(entityClass).getName();
@@ -131,7 +131,7 @@ public class JoinSqlHelper {
     /**
      * example 支持 for update
      *
-     * @return
+     * @return result
      */
     public static String exampleForUpdate() {
         StringBuilder sql = new StringBuilder();

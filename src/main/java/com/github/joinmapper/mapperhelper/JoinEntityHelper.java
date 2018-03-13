@@ -17,8 +17,8 @@ public class JoinEntityHelper {
     /**
      * 获取表对象
      *
-     * @param entityClass
-     * @return
+     * @param entityClass Class
+     * @return result
      */
     public static JoinEntityTable getJoinEntityTable(Class<?> entityClass) {
         JoinEntityTable joinEntityTable = joinEntityTableMap.get(entityClass);

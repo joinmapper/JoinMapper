@@ -87,7 +87,7 @@ public class JoinExample extends Example {
      * @param resultProperty 查询结果映射到哪个属性
      * @param onProperty1    关联条件
      * @param onProperty2    关联条件
-     * @return
+     * @return result 
      */
     public Join leftJoin(JoinExample joinExample, ResultType resultType, String resultProperty, String onProperty1, String onProperty2) {
         Join join = new Join(JoinType.LEFT, joinExample, resultType, resultProperty, onProperty1, onProperty2);
@@ -103,7 +103,7 @@ public class JoinExample extends Example {
      * @param resultProperty 查询结果映射到哪个属性
      * @param onProperty1    关联条件
      * @param onProperty2    关联条件
-     * @return
+     * @return Join
      */
     public Join rightJoin(JoinExample joinExample, ResultType resultType, String resultProperty, String onProperty1, String onProperty2) {
         Join join = new Join(JoinType.RIGHT, joinExample, resultType, resultProperty, onProperty1, onProperty2);
@@ -119,7 +119,7 @@ public class JoinExample extends Example {
      * @param resultProperty 查询结果映射到哪个属性
      * @param onProperty1    关联条件
      * @param onProperty2    关联条件
-     * @return
+     * @return result
      */
     public Join innerJoin(JoinExample joinExample, ResultType resultType, String resultProperty, String onProperty1, String onProperty2) {
         Join join = new Join(JoinType.INNER, joinExample, resultType, resultProperty, onProperty1, onProperty2);
@@ -130,8 +130,8 @@ public class JoinExample extends Example {
     /**
      * 根据属性获取数据库字段
      *
-     * @param property
-     * @return
+     * @param property String
+     * @return result
      */
     public String column(String property) {
         if (propertyMap.containsKey(property)) {
@@ -288,8 +288,8 @@ public class JoinExample extends Example {
         /**
          * 给排序字段增加别名
          *
-         * @param property
-         * @return
+         * @param property String
+         * @return result
          */
         @Override
         public Example.OrderBy orderBy(String property) {

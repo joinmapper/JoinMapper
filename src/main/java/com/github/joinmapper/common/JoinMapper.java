@@ -8,8 +8,7 @@ import java.util.List;
 
 /**
  * 关联查询
- *
- * @param <T>
+ * @param <T> 泛型
  */
 public interface JoinMapper<T> {
     @SelectProvider(type = JoinProvider.class, method = "dynamicSQL")

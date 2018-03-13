@@ -17,8 +17,8 @@ public abstract class JoinOGNL {
     /**
      * 拼接join语句
      *
-     * @param joinFrom
-     * @return
+     * @param joinFrom JoinExample
+     * @return result
      */
     public static String join(JoinExample joinFrom) {
         if (joinFrom == null) {
@@ -67,8 +67,8 @@ public abstract class JoinOGNL {
     /**
      * 获取所有的column
      *
-     * @param joinExample
-     * @return
+     * @param joinExample JoinExample
+     * @return result
      */
     public static String getAllColumns(JoinExample joinExample) {
         StringBuilder sql = new StringBuilder();
@@ -79,8 +79,8 @@ public abstract class JoinOGNL {
     /**
      * 获取所有的order by
      *
-     * @param joinExample
-     * @return
+     * @param joinExample JoinExample
+     * @return result
      */
     public static String orderBy(JoinExample joinExample) {
         StringBuilder sql = new StringBuilder();

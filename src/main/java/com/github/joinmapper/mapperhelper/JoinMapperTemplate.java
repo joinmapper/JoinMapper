@@ -20,8 +20,9 @@ public class JoinMapperTemplate extends MapperTemplate {
     /**
      * 设置resultMap
      *
-     * @param ms
-     * @param joinExample
+     * @param ms MappedStatement
+     * @param joinExample JoinExample
+     * @param joinExample JoinExample
      */
     public static void setJoinResultType(MappedStatement ms, JoinExample joinExample) {
         List<ResultMap> resultMaps = new ArrayList<ResultMap>();

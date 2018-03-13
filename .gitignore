@@ -8,3 +8,4 @@
 /settings.gradle
 
 *.iml
+/gradle.properties

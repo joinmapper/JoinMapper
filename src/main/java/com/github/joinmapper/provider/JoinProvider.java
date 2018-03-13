@@ -45,8 +45,8 @@ public class JoinProvider extends JoinMapperTemplate {
     /**
      * 根据Example查询
      *
-     * @param ms
-     * @return
+     * @param ms MappedStatement
+     * @return result
      */
     public String selectJoin(MappedStatement ms) {
         Class<?> entityClass = getEntityClass(ms);
