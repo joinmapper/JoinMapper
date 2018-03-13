@@ -1,6 +1,6 @@
 package com.github.joinmapper.test.junit.springboot;
 
-import com.github.joinmapper.test.TestAppMain;
+import com.github.joinmapper.test.SpringBootMain;
 import com.github.joinmapper.test.junit.BaseJoinMapperJunit;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date 2018/03/09
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = TestAppMain.class)
+@SpringBootTest(classes = SpringBootMain.class)
 public class SpringBootBaseJoinMapperJunit extends BaseJoinMapperJunit {
 
     public void dataSource() {

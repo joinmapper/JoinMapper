@@ -70,4 +70,8 @@ public class JoinEntityTable {
         }
         return this.joinResultMap;
     }
+
+    public EntityTable getEntityTable() {
+        return entityTable;
+    }
 }

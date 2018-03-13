@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @SpringBootApplication
 @MapperScan(basePackages = "com.github.joinmapper.test.dao")
-public class TestAppMain {
+public class SpringBootMain {
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(TestAppMain.class);
+        SpringApplication app = new SpringApplication(SpringBootMain.class);
         app.run(args);
     }
 }

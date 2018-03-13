@@ -4,6 +4,7 @@ import com.github.joinmapper.entity.JoinExample;
 import tk.mybatis.mapper.entity.EntityColumn;
 import tk.mybatis.mapper.entity.EntityTable;
 import tk.mybatis.mapper.mapperhelper.EntityHelper;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
 import java.util.Set;
@@ -84,31 +85,24 @@ public abstract class JoinOGNL {
     public static String orderBy(JoinExample joinExample) {
         StringBuilder sql = new StringBuilder();
         buildOrderBy(joinExample, sql); // 递归
-        return sql.toString();
+        if (sql.length()==0){
+            return "";
+        }else{
+            return " order by " + sql.toString().substring(0, sql.length()-1);
+        }
     }
 
     private static void buildOrderBy(JoinExample joinExample, StringBuilder sql) {
-        Class<?> entityClass = joinExample.getEntityClass();
-        String tableName = EntityHelper.getEntityTable(entityClass).getName();
-        String orderByClause = joinExample.getOrderByClause();
-//        orderByClause = "id,code DESC,code ASC"
-        if (orderByClause != null && !"".equals(orderByClause)) {
-            sql.append(" order by ");
-            String[] orderByColumns = orderByClause.replace("orderType", "").split(",");
-            for (int i = 0; i < orderByColumns.length; i++) {
-                sql.append(tableName + "_" + orderByColumns[i]);
-                if (i != orderByColumns.length - 1) {
-                    sql.append(",");
-                }
-            }
+        if (StringUtil.isNotEmpty(joinExample.getJoinOrderByClause())){
+            sql.append(joinExample.getJoinOrderByClause() + ",");
         }
-        /*List<JoinExample.Join> joinList = joinExample.getJoinList();
+        List<JoinExample.Join> joinList = joinExample.getJoinList();
         if (joinExample.getJoinList() != null && !joinExample.getJoinList().isEmpty()) { // 递归结束语句
             for (JoinExample.Join join : joinList) {
                 JoinExample joinTo = join.getJoinTo();
                 buildOrderBy(joinTo, sql);
             }
-        }*/
+        }
     }
 
     public static void main(String[] args) {

@@ -17,7 +17,7 @@ import tk.mybatis.mapper.entity.Example;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class BaseJoinMapperJunit extends JunitUtil {
+public abstract class BaseJoinMapperJunit extends JunitUtil {
     @Autowired
     protected DataSource dataSource;
 
@@ -46,11 +46,11 @@ public class BaseJoinMapperJunit extends JunitUtil {
 
     @Test
     public void testExample() {
-        Example example = new Example(TableOne.class);
+        /*Example example = new Example(TableOne.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("code", "table_one_code");
         List<TableOne> tableOnes = tableOneMapper.selectByExample(example);
-        super.print(tableOnes);
+        super.print(tableOnes);*/
     }
 
     @Test
@@ -78,14 +78,17 @@ public class BaseJoinMapperJunit extends JunitUtil {
     public void testJoinExample2() {
         try {
             JoinExample tableOneEx = new JoinExample(TableOne.class);
-            tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
+//            tableOneEx.orderBy("id").orderBy("code").desc().orderBy("code").asc();
             //tableOneEx.selectProperties("id");
             Example.Criteria criteria = tableOneEx.createCriteria();
             criteria.andEqualTo("id", "table_one_1");
 
             JoinExample tableTwoEx = new JoinExample(TableTwo.class);
+//            tableTwoEx.orderBy("id").orderBy("code").desc();
             JoinExample tableThreeEx = new JoinExample(TableThree.class);
+//            tableThreeEx.orderBy("id").orderBy("code").desc();
             JoinExample tableFourEx = new JoinExample(TableFour.class);
+            tableFourEx.createJoinOrderBy().orderBy(TableOne.class,"id").orderBy("id").desc().orderBy(TableTwo.class, "code");
 
             //关联查询设置
             tableOneEx.leftJoin(tableTwoEx, JoinExample.ResultType.ONE, "tableTwo", "id", "id");
