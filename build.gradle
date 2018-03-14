@@ -94,23 +94,23 @@ uploadArchives {
         beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
         //指定项目部署到的中央库地址，UserName和Password就是https://issues.sonatype.org中注册的账号。
-        repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        repository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
             authentication(userName: sonatypeUsername, password: sonatypePassword)
         }
 
         //构造项目的Pom文件，参见Part 2中Pom文件的规范，不要遗漏必填项
         pom.version = "$project.version"
-        pom.artifactId = "mybatis-join-mapper"
+        pom.artifactId = "$project.name"
         pom.groupId = "$project.group"
         pom.project {
-            name "MybatisJoinMapper"
+            name "$project.name"
             packaging 'jar'
             description '基于tk.myabtis，通过Mapper接口提供数据库表的关联查询功能'
-            url 'https://github.com/joinmapper/Mybatis-JoinMapper'
+            url 'https://github.com/joinmapper/mybatis-join-mapper'
             scm {
-                url 'https://github.com/joinmapper/Mybatis-JoinMapper'
-                connection 'scm:git@https://github.com/joinmapper/Mybatis-JoinMapper.git'
-                developerConnection 'git@https://github.com/joinmapper/Mybatis-JoinMapper.git'
+                url 'https://github.com/joinmapper/mybatis-join-mapper'
+                connection 'scm:git@https://github.com/joinmapper/mybatis-join-mapper.git'
+                developerConnection 'git@https://github.com/joinmapper/mybatis-join-mapper.git'
             }
 
             licenses {
