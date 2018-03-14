@@ -34,7 +34,7 @@ public class JoinInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         Object[] args = invocation.getArgs();
         MappedStatement ms = (MappedStatement) args[0];
-        Object parameter = args[1];
+        Object parameter = args[1]; // 目标方法中的参数
         // 关联查询判断
         if (parameter != null && parameter instanceof JoinExample) {
             // 设置resultMap
@@ -45,9 +45,18 @@ public class JoinInterceptor implements Interceptor {
         return proceed;
     }
 
+    /**
+     * 是否执行代理方法控制
+     * @param target
+     * @return
+     */
     @Override
     public Object plugin(Object target) {
-        return Plugin.wrap(target, this);
+        if (target instanceof Executor){ // 是否创建代理对象
+            Object wrap = Plugin.wrap(target, this); // 创建代理, 才会执行intercept方法
+            return wrap;
+        }
+        return target;
     }
 
     @Override

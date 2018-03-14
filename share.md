@@ -1,8 +1,8 @@
-## 目录
-1. *Mybatis,Hibernate,tk.mybatis对比*
-2. <u >*Mybatis插件编写方法及原理(本次分享的目的)*</u>
-3. *Mybatis插件编写示例：mybatis-join-mapper*
-## 1. Mybatis,Hibernate,tk.mybatis对比
+####  目录
+>1. *Mybatis,Hibernate,tk.mybatis对比*
+>2. <u >*Mybatis插件编写方法及原理(本次分享的目的)*</u>
+>3. *Mybatis插件编写示例：mybatis-join-mapper*
+### 1. Mybatis,Hibernate,tk.mybatis对比
 - 共同点
     - 都是ORM框架（Object Relational Mapping）
 - Mybatis优势
@@ -15,13 +15,21 @@
     - Hibernate有更好的二级缓存机制，可以使用第三方缓存。MyBatis本身提供的缓存机制不佳。
 - tk.mybatis优势
     - 使用注解(@Table,@Id,@Column等)和Mapper接口，不需要在xml中编写sql，快速开发。
-## 2. Mybatis插件编写方法及原理（pagehelper和tk.mybatis都是基于Mybatis的插件）
+### 2. Mybatis插件编写方法及原理（pagehelper和tk.mybatis都是基于Mybatis的插件）
 - pagehelper插件分析
+    - 带着问题分析
+        - pagehelper如何整合Mybatis？
+        - com.github.pagehelper.PageHelper工作原理？
+    - 分析
+        - 整合方法
+          > 定义拦截器com.github.pagehelper.PageInterceptor(继承org.apache.ibatis.plugin.Interceptor),通过拦截器对我们自定义的方法进行拦截，拦截的目的：执行select count和limit语句及分页的sql方言处理
+          
+        - 
 
 - tk.mybatis插件分析
 
 - Mybatis插件编写方法总结
-## 3. Mybatis插件编写示例：mybatis-join-mapper
+### 3. Mybatis插件编写示例：mybatis-join-mapper
 - 背景
 - 需求分析
 - 实现步骤
