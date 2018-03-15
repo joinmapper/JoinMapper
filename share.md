@@ -257,7 +257,6 @@
         }
         ```
         - debug以上提到的相关类和方法，更形象的了解，运行方法com.github.joinmapper.test.junit.springboot.SpringBootBaseJoinMapperJunit.testExample
-- Mybatis插件编写方法总结
 ### 3. Mybatis插件编写示例：mybatis-join-mapper
 - 背景
     >我在开发案件管理任务时,数据库表较多,表中字段也很多,关联查询多张表时,编写resultMap很繁琐,而且xml很臃肿,我想:能不能模仿tk.mybatis实现一个关联查询的插件
