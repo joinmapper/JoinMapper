@@ -1,6 +1,6 @@
 package com.github.joinmapper.mapperhelper;
 
-import com.github.joinmapper.provider.JoinEntityTable;
+import com.github.joinmapper.entity.JoinEntityTable;
 import tk.mybatis.mapper.MapperException;
 import tk.mybatis.mapper.entity.EntityTable;
 import tk.mybatis.mapper.mapperhelper.EntityHelper;

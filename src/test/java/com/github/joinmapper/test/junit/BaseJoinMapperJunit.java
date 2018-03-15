@@ -46,11 +46,11 @@ public abstract class BaseJoinMapperJunit extends JunitUtil {
 
     @Test
     public void testExample() {
-        /*Example example = new Example(TableOne.class);
+        Example example = new Example(TableOne.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("code", "table_one_code");
         List<TableOne> tableOnes = tableOneMapper.selectByExample(example);
-        super.print(tableOnes);*/
+        super.print(tableOnes);
     }
 
     @Test

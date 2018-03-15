@@ -1,7 +1,7 @@
 package com.github.joinmapper.mapperhelper;
 
 import com.github.joinmapper.entity.JoinExample;
-import com.github.joinmapper.provider.JoinEntityTable;
+import com.github.joinmapper.entity.JoinEntityTable;
 import org.apache.ibatis.mapping.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;

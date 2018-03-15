@@ -1,4 +1,4 @@
-package com.github.joinmapper.provider;
+package com.github.joinmapper.entity;
 
 import org.apache.ibatis.mapping.ResultFlag;
 import org.apache.ibatis.mapping.ResultMap;

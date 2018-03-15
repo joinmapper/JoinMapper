@@ -2,6 +2,7 @@
 >1. *Mybatis,Hibernate,tk.mybatis对比*
 >2. <u >*Mybatis插件编写方法及原理(本次分享的目的)*</u>
 >3. *Mybatis插件编写示例：mybatis-join-mapper*
+>4. *总结*
 ### 1. Mybatis,Hibernate,tk.mybatis对比
 - 共同点
     - 都是ORM框架（Object Relational Mapping）
@@ -125,8 +126,8 @@
         - Mapper接口中的查询参数是如何被使用的，在哪里使用？
         - 我们没有在**Mapper.xml中配置resultMap，查询结果如何映射？
     - 分析
-        - org.apache.ibatis.binding.MapperProxy动态实现Mapper接口
-        - 在Mapper接口中使用注解@SelectProvider,用来指定sql的解析方法
+        - 使用org.apache.ibatis.binding.MapperProxy动态实现Mapper接口
+        - 在Mapper接口中使用注解@SelectProvider,用来找到sql的解析方法
         ```java
         package tk.mybatis.mapper.common.base.select;
         import org.apache.ibatis.annotations.SelectProvider;
@@ -148,6 +149,7 @@
             T selectOne(T record);
         }
         ```
+        > BaseSelectProvider.selectOne返回sql或xml，让Mybatis解析
         ```Java
         public class BaseSelectProvider extends MapperTemplate {
             public BaseSelectProvider(Class<?> mapperClass, MapperHelper mapperHelper) {
@@ -203,19 +205,121 @@
             return sql.toString();
         }
         ```
-
+        - tk.mybatis.mapper.mapperhelper.SqlHelper的工作原理
+            >SqlHelper通过tk.mybatis.mapper.mapperhelper.EntityHelper和tk.mybatis.mapper.util.OGNL拼接sql或xml
+        - tk.mybatis.mapper.mapperhelper.EntityHelper
+            >EntityHelper存放实体和数据库字段等
+        - tk.mybatis.mapper.util.OGNL
+            ><if test="ajbh != null and ajbh != ''">是Mybatis中[OGNL表达式](http://blog.csdn.net/isea533/article/details/50061705 "OGNL表达式")
+            >${@tk.mybatis.mapper.util.OGNL@andOr(criteria)}"，也是Mybatis的OGNL表达式
+            ```Java
+            tk.mybatis.mapper.mapperhelper.SqlHelper.exampleSelectColumns
+            public static String exampleSelectColumns(Class<?> entityClass) {
+                StringBuilder sql = new StringBuilder();
+                sql.append("<choose>");
+                sql.append("<when test=\"@tk.mybatis.mapper.util.OGNL@hasSelectColumns(_parameter)\">"); // hasSelectColumns是OGNL类中的方法，参数_paramter是Mapper接口看中的参数对象tk.mybatis.mapper.entity.Example
+                sql.append("<foreach collection=\"_parameter.selectColumns\" item=\"selectColumn\" separator=\",\">"); // selectColumns是参数对象的属性
+                。。。。。。
+                sql.append("</otherwise>");
+                sql.append("</choose>");
+                return sql.toString();
+            }
+            ```
+            ```Java
+            tk.mybatis.mapper.mapperhelper.SqlHelper.exampleWhereClause
+            /**
+             * Example查询中的where结构，用于只有一个Example参数时
+             */
+            public static String exampleWhereClause() {
+                return "<if test=\"_parameter != null\">" +
+                    "<where>\n" +
+                    "  <foreach collection=\"oredCriteria\" item=\"criteria\">\n" +
+                    "    <if test=\"criteria.valid\">\n" +
+                    "      ${@tk.mybatis.mapper.util.OGNL@andOr(criteria)}" + // 可以不写_parameter,也表示Mapper入参对象的属性tk.mybatis.mapper.entity.Example.criteria
+                    "      。。。。。。
+                    "    </if>\n" +
+                    "  </foreach>\n" +
+                    "</where>" +
+                    "</if>";
+            }
+            ```
+        - tk.mybatis.mapper.mapperhelper.MapperTemplate.setResultType设置resultMap
+        ```Java
+        protected void setResultType(MappedStatement ms, Class<?> entityClass) {
+            EntityTable entityTable = EntityHelper.getEntityTable(entityClass);
+            List<ResultMap> resultMaps = new ArrayList<ResultMap>();
+            resultMaps.add(entityTable.getResultMap(ms.getConfiguration())); // entityTable.getResultMap获取结果映射 
+            MetaObject metaObject = SystemMetaObject.forObject(ms); // ibatis反射工具类
+            metaObject.setValue("resultMaps", Collections.unmodifiableList(resultMaps)); // 反射注入
+        }
+        ```
+        - debug以上提到的相关类和方法，更形象的了解，运行方法com.github.joinmapper.test.junit.springboot.SpringBootBaseJoinMapperJunit.testExample
 - Mybatis插件编写方法总结
 ### 3. Mybatis插件编写示例：mybatis-join-mapper
 - 背景
+    >我在开发案件管理任务时,数据库表较多,表中字段也很多,关联查询多张表时,编写resultMap很繁琐,而且xml很臃肿,我想:能不能模仿tk.mybatis实现一个关联查询的插件
 - 需求分析
+    - 如何用对象表达关联查询的需求,如tk.mybatis.mapper.entity.Example
+    - 如何拼接关联查询的sql
+    - 如何在Java代码中设置resultMap
 - 实现步骤
-    - 定义Mapper接口
-    - 动态实现Mapper接口
+    - 定义JoinExample类(继承Example)，存放关联查询的指令，满足用户的需求
+    - 定义JoinMapper接口com.github.joinmapper.common.JoinMapper(JoinExample joinExample)
+    - 动态实现Mapper接口com.github.joinmapper.provider.JoinProvider
+    - 根据JoinProvider.selectJoin方法所需，合理使用Mybatis,ibatis,tk.mybatis的工具类，并扩展相关工具类
+    ```Java
+    com.github.joinmapper.mapperhelper.JoinEntityHelper，
+    com.github.joinmapper.mapperhelper.JoinMapperTemplate，
+    com.github.joinmapper.mapperhelper.JoinSqlHelper,
+    com.github.joinmapper.util.JoinOGNL
+    ```
+    - 定义com.github.joinmapper.JoinInterceptor拦截器，设置resultMap
     - 在Mybatis中配置插件
-    - 测试
-        - 创建多个表，通过JoinMapper接口关联查询，并结合pagehelper进行分页
-        - 对tk.mybatis的版本兼容测试
-- 这个插件的优点和缺点
-    - 优点：数据库字段较多或者关联查询很多时，在xml中编写resultMap很繁琐，使用这个插件可以提高编程效率，在什么场景下使用能充分体现它的价值。
-    - 缺点：
+    ```xml
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mapping/**/*Mapper.xml"/>
+        <property name="plugins">
+            <!--插件的执行顺序为倒叙,PageInterceptor应该最后执行，放在第一个 -->
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+                        </value>
+                    </property>
+                </bean>
+                <bean class="com.github.joinmapper.JoinInterceptor"> 
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <bean id="mapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com/github/joinmapper/test/dao"/>
+        <property name="properties">
+          <value>
+              mappers=tk.mybatis.mapper.common.Mapper,com.github.joinmapper.common.JoinMapper
+        
+          </value>
+        </property>
+        <!--多数据源时，根据name装配-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="sqlSessionTemplateBeanName" value="sqlSession"/>
+    </bean>
+    ```
+- 测试
+    - 创建多个表，通过JoinMapper接口关联查询，并结合pagehelper进行分页
+    - 对tk.mybatis的版本兼容测试
+### 4.总结
+- 我们一起了解了pagehelper，tk.mybatis 的基本原理，掌握Mybatis插件编写的方法，并在示例中运用
+- 插件中使用到的技术或技巧，可以应用到日常开发中（按照使用频率排序）
+    1. 在Mybatis中可以使用灵活的OGNL表达式，如：${@tk.mybatis.mapper.util.OGNL@andOr(criteria)}
+    2. 反射工具类org.apache.ibatis.reflection.SystemMetaObject
+    3. ThreadLocal存放全局变量
+    4. Mybatis插件编写方法，参考示例[mybatis-join-mapper](https://github.com/joinmapper/mybatis-join-mapper "mybatis-join-mapper")
     
