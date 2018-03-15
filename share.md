@@ -28,27 +28,28 @@
         - Interceptor接口详解
         ```Java
         @Intercepts(
-            {
-                /**
-                 * @param type 拦截的目标，
-                 *         包括：org.apache.ibatis.executor.Executor(方法执行),
-                 *               org.apache.ibatis.executor.parameter.ParameterHandler(查询参数处理,了解一下org.apache.ibatis.scripting.defaults.DefaultParameterHandler83行),
-                 *               org.apache.ibatis.executor.resultset.ResultSetHandler(查询结果处理,了解一下org.apache.ibatis.executor.resultset.DefaultResultSetHandler152行),
-                 *               org.apache.ibatis.executor.statement.StatementHandler(statement处理，了解一下org.apache.ibatis.executor.statement.BaseStatementHandler.setStatementTimeout)
-                 * @param method 拦截的方法
-                 * @param args 方法的参数
-                 *
-                 */
-                @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
-                @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
-            }
+        {
+            /**
+             * @param type 拦截的目标，
+             * 包括：org.apache.ibatis.executor.Executor(方法执行),
+             * org.apache.ibatis.executor.parameter.ParameterHandler(查询参数处理,了解一下org.apache.ibatis.scripting.defaults.DefaultParameterHandler83行),
+             * org.apache.ibatis.executor.resultset.ResultSetHandler(查询结果处理,了解一下org.apache.ibatis.executor.resultset.DefaultResultSetHandler152行),
+             * org.apache.ibatis.executor.statement.StatementHandler(statement处理，了解一下org.apache.ibatis.executor.statement.BaseStatementHandler.setStatementTimeout)
+             * @param method 拦截的方法
+             * @param args 方法的参数
+             *
+             */
+            @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+            @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
+        }
         )
         public class JoinInterceptor implements Interceptor {
         
             @Override
             public Object intercept(Invocation invocation) throws Throwable {
                 Object[] args = invocation.getArgs();
-                MappedStatement ms = (MappedStatement) args[0]; // 为什么args[0]获取到的就是MappedStatement，而且在转化类型之前不需要类型判断，因为注解@Intercepts.@Signature.args配置决定
+                // 为什么args[0]获取到的就是MappedStatement，而且在转化类型之前不需要类型判断，因为注解@Intercepts.@Signature.args配置决定
+                MappedStatement ms = (MappedStatement) args[0]; 
                 Object parameter = args[1]; // 自定义Mapper接口方法中的参数
                 // 关联查询判断
                 if (parameter != null && parameter instanceof JoinExample) {
@@ -217,8 +218,10 @@
             public static String exampleSelectColumns(Class<?> entityClass) {
                 StringBuilder sql = new StringBuilder();
                 sql.append("<choose>");
-                sql.append("<when test=\"@tk.mybatis.mapper.util.OGNL@hasSelectColumns(_parameter)\">"); // hasSelectColumns是OGNL类中的方法，参数_paramter是Mapper接口看中的参数对象tk.mybatis.mapper.entity.Example
-                sql.append("<foreach collection=\"_parameter.selectColumns\" item=\"selectColumn\" separator=\",\">"); // selectColumns是参数对象的属性
+                // hasSelectColumns是OGNL类中的方法，参数_paramter是Mapper接口看中的参数对象tk.mybatis.mapper.entity.Example
+                sql.append("<when test=\"@tk.mybatis.mapper.util.OGNL@hasSelectColumns(_parameter)\">"); 
+                // selectColumns是参数对象的属性
+                sql.append("<foreach collection=\"_parameter.selectColumns\" item=\"selectColumn\" separator=\",\">"); 
                 。。。。。。
                 sql.append("</otherwise>");
                 sql.append("</choose>");
