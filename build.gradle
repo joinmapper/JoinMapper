@@ -7,8 +7,8 @@ apply plugin: 'signing' //使用signing plugin做数字签名
 group "com.github.joinmapper"
 version "1.0-SNAPSHOT"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 ext{
