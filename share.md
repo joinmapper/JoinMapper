@@ -1,7 +1,7 @@
 ####  目录
 >1. *Mybatis,Hibernate,tk.mybatis对比*
 >2. <u >*Mybatis插件编写方法及原理(本次分享的目的)*</u>
->3. *Mybatis插件编写示例：mybatis-join-mapper*
+>3. *Mybatis插件编写示例：mybatis-join-mapper*_
 >4. *总结*
 ### 1. Mybatis,Hibernate,tk.mybatis对比
 - 共同点
@@ -17,7 +17,7 @@
 - tk.mybatis优势
     - 使用注解(@Table,@Id,@Column等)和Mapper接口，不需要在xml中编写sql，快速开发。
 ### 2. Mybatis插件编写方法及原理
-   >pagehelper和tk.mybatis是Mybatis的插件,通过分析这两个插件来学习
+- pagehelper和tk.mybatis是Mybatis的插件,通过分析这两个插件来学习
 - pagehelper插件分析
     - 带着问题分析
         - pagehelper如何整合Mybatis？
