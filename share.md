@@ -1,7 +1,7 @@
 ####  目录
 >1. *Mybatis,Hibernate,tk.mybatis对比*
 >2. <u >*Mybatis插件编写方法及原理(本次分享的目的)*</u>
->3. *Mybatis插件编写示例：mybatis-join-mapper*_
+>3. *Mybatis插件编写示例：mybatis-join-mapper*
 >4. *总结*
 ### 1. Mybatis,Hibernate,tk.mybatis对比
 - 共同点
