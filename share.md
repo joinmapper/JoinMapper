@@ -211,7 +211,7 @@
         - tk.mybatis.mapper.mapperhelper.EntityHelper
             >EntityHelper存放实体和数据库字段等
         - tk.mybatis.mapper.util.OGNL
-            ><if test="ajbh != null and ajbh != ''">是Mybatis中[OGNL表达式](http://blog.csdn.net/isea533/article/details/50061705 "OGNL表达式")
+            >\<if test="ajbh != null and ajbh != ''"\>是Mybatis中[OGNL表达式](http://blog.csdn.net/isea533/article/details/50061705 "OGNL表达式")
             >${@tk.mybatis.mapper.util.OGNL@andOr(criteria)}"，也是Mybatis的OGNL表达式
             ```Java
             tk.mybatis.mapper.mapperhelper.SqlHelper.exampleSelectColumns
